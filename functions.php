@@ -30,4 +30,9 @@ if ( file_exists( get_stylesheet_directory_uri() . 'inc/cmb2/init.php' ) ) {
 	//require_once get_template_directory() . 'inc/cmb2/init.php';
 }
 
+/**
+* Add woocommerce edits
+*/
+require_once get_stylesheet_directory() . '/woocommerce/functions.php';
+
  ?>
