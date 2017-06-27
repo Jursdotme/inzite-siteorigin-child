@@ -26,9 +26,14 @@ function inz_enqueue_styles() {
 /**
 * Include CMB2
 */
-if ( file_exists( get_stylesheet_directory_uri() . 'inc/cmb2/init.php' ) ) {
-	//require_once get_template_directory() . 'inc/cmb2/init.php';
+if ( file_exists( get_stylesheet_directory() . '/inc/cmb2/init.php' ) ) {
+	require_once get_stylesheet_directory() . '/inc/cmb2/init.php';
 }
+
+/**
+* Include product downloads metabox
+*/
+require_once get_stylesheet_directory() . '/inc/product-downloads.php';
 
 /**
 * Add woocommerce edits
