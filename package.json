@@ -1,0 +1,49 @@
+{
+  "name": "inzite-siteorigin-child",
+  "version": "0.0.1",
+  "description": "Inzite Siteorigin Child",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "csslint": "stylelint src/scss/**/*.scss; exit 0",
+    "scss": "node-sass --output-style compressed --quiet --indent-type tab --indent-width 4 -o dist/css src/scss --include-path node_modules/normalize-scss/sass",
+    "autoprefixer": "postcss -u autoprefixer -r dist/css/*",
+    "lint": "eslint src/js; exit 0",
+    "uglify": "mkdir -p dist/js && uglifyjs src/js/*.js -m -o dist/js/app.js && uglifyjs src/js/*.js -m -c -o dist/js/app.min.js",
+    "imagemin": "imagemin src/images dist/images -p",
+    "icons": "svgo -f src/images/icons && mkdir -p dist/images && svg-sprite-generate -d src/images/icons -o dist/images/icons.svg",
+    "build:css": "npm run -s scss && npm run -s autoprefixer",
+    "build:js": "npm run -s lint && npm run -s uglify",
+    "build:images": "npm run -s imagemin && npm run -s icons",
+    "build:all": "npm run -s build:css && npm run -s build:js && npm run -s build:images",
+    "watch:css": "onchange 'src/scss/**/*.scss' -- npm run -s build:css && echo '{{event}} to {{changed}}'",
+    "watch:js": "onchange 'src/js/**/*.js' -- npm run -s build:js",
+    "watch:csslint": "onchange 'src/scss/**/*.scss' -- npm run -s csslint",
+    "watch:all": "parallelshell 'npm run -s watch:css' 'npm run -s watch:js'",
+    "start": "npm run watch:all",
+    "stats:css": "cssstats dist/css/style.css cssstats.json",
+    "postinstall": "npm run watch:all"
+  },
+  "keywords": [
+    "Wordpress",
+    "Theme",
+    "Jursdotme"
+  ],
+  "author": "Rasmus Jürs",
+  "license": "ISC",
+  "devDependencies": {
+    "@alienlebarge/stylelint-config": "^2.1.0",
+    "eslint": "^4.0.0",
+    "node-sass": "^4.5.3",
+    "normalize-scss": "^7.0.0",
+    "onchange": "^3.2.1",
+    "parallelshell": "^3.0.1",
+    "postcss-cli": "^4.1.0",
+    "postcss-cssstats": "^1.0.0",
+    "postscss": "^1.6.0",
+    "pretty-json": "^0.1.1",
+    "stylelint": "^7.11.0",
+    "stylelint-selector-bem-pattern": "^1.0.0",
+    "uglify-js": "^3.0.17"
+  }
+}
